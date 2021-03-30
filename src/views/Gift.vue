@@ -13,7 +13,7 @@
           class="relative px-1 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20"
         >
           <div class="max-w-md mx-auto">
-            <div v-if="!loading">
+            <div v-if="!fielding.loading">
               <div v-if="fielding.ok">
                 <p class="font-heading text-5xl">
                   {{ fromApi.name }}
@@ -173,7 +173,7 @@ export default {
         image: ""
       },
       fielding: {
-        loading: true,
+        loading: false,
         notAuthMsg: "",
         ok: false,
         msg: {}
@@ -182,10 +182,7 @@ export default {
         tokens: "",
         txHash: ""
       },
-      loading: {
-        // default is true
-        type: Boolean
-      },
+      loading: false,
       isOpen: true,
       network: contractAssets.active
     };
@@ -196,14 +193,14 @@ export default {
     });
   },
   created: async function() {
-    this.$data.loading = true;
+    this.$data.fielding.loading = true;
     // fetch hash details
     let r = await axios.get(
       "https://testing-gift-api.herokuapp.com/hash/" + this.$props.hash
     );
 
     // details fetched -> set loading to false
-    this.$data.loading = false;
+    this.$data.fielding.loading = false;
     const { ok } = r.data;
 
     // pick and display info
