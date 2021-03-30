@@ -138,6 +138,14 @@
           </div>
         </div>
       </div>
+      <!-- <div class="static">
+        <div class="absolute bottom-0 left-0 p-5 font-kernel">
+          NFT design & code by
+          <a href="https://www.instagram.com/malayvasa/" target="_new"
+            >@malayvasa
+          </a>
+        </div>
+      </div> -->
     </div>
   </div>
 </template>
