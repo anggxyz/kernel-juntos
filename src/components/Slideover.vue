@@ -162,11 +162,11 @@ export default {
     "$store.state.token": async function() {
       console.log(
         "sending req,",
-        "https://testing-gift-api.herokuapp.com/raw/",
+        "https://testing-gift-api.herokuapp.com/gift/raw/",
         this.$store.getters.token
       );
       let r = await axios.get(
-        "https://testing-gift-api.herokuapp.com/raw/" +
+        "https://testing-gift-api.herokuapp.com/gift/raw/" +
           this.$store.getters.token
       );
       this.$data.metadata = r.data;

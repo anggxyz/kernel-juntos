@@ -204,7 +204,7 @@ export default {
     this.$data.fielding.loading = true;
     // fetch hash details
     let r = await axios.get(
-      "https://testing-gift-api.herokuapp.com/hash/" + this.$props.hash
+      "https://testing-gift-api.herokuapp.com/gift/hash/" + this.$props.hash
     );
 
     // details fetched -> set loading to false
