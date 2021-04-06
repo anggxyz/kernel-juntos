@@ -5,10 +5,10 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/c/:hash",
+    path: "/rsvp/:recordId",
     props: true,
-    name: "Claim",
-    component: () => import("../views/Claim.vue")
+    name: "Junto",
+    component: () => import("../views/Junto.vue")
   },
   {
     path: "/404",

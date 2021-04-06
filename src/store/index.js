@@ -5,44 +5,26 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    account: "",
-    network: "",
-    chainId: "",
-    currentOwner: "",
-    claim_status: "",
-    panelOpen: false,
-    tokenMetadata: {},
-    token: ""
+    event: {
+      title: "",
+      description: "",
+      date_time: "",
+      creator: ""
+    }
   },
   mutations: {
-    change(state, obj) {
-      state.account = obj.account;
-      state.network = obj.network;
-      state.chainId = obj.chainId;
-    },
-    updateOwner(state, obj) {
-      state.currentOwner = obj.currentOwner;
-      state.claim_status = obj.claim_status;
-    },
-    togglePanel(state, bool) {
-      state.panelOpen = bool;
-    },
-    updateTokenMetadata(state, json) {
-      state.tokenMetadata = json;
-    },
-    addToken(state, token) {
-      state.token = token;
+    updateEvent(state, obj) {
+      state.title = obj.title;
+      state.description = obj.description;
+      state.date_time = obj.date_time;
+      state.creator = obj.creator;
     }
   },
   getters: {
-    account: state => state.account,
-    network: state => state.network,
-    chainId: state => state.chainId,
-    currentOwner: state => state.currentOwner,
-    claim_status: state => state.claim_status,
-    panelOpen: state => state.panelOpen,
-    tokenMetadata: state => state.tokenMetadata,
-    token: state => state.token
+    title: state => state.title,
+    description: state => state.description,
+    date_time: state => state.date_time,
+    creator: state => state.creator
   },
   actions: {},
   modules: {}
