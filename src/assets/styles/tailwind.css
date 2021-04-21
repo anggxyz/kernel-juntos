@@ -5,6 +5,9 @@
 a {
   border-bottom: 2px dashed #8C65F7;
 }
+.tweet-link a {
+  border-bottom: none;
+}
 .spinner {
   width: 40px;
   height: 40px;

@@ -23,49 +23,64 @@
       <div
         class="container max-w-3xl mx-auto mb-14 my-6 px-14 py-14 bg-gray-100 shadow-xl rounded-3xl"
       >
-        <div class="font-serif text-6xl">
-          {{ event.title }}
-        </div>
-        <div class="leading-none text-gray-500 tracking-tight font-extralight">
-          {{ event.date_time_event }}
-        </div>
-        <div class="font-sans whitespace-pre-line mt-5">
-          {{ event.description }}
-        </div>
-        <div class="mt-12 font-bold">
-          Proposer:
-          <span class="font-normal">
-            {{ event.creator }}
-          </span>
-        </div>
-        <div class="font-bold">
-          Date & time:
-          <span class="font-normal">
-            {{ event.date_time_event }}
-          </span>
-        </div>
-        <!-- <form class="mt-12"> -->
-        <div v-if="udatingAttendees">
-          <div class="spinner rsvp">
-            <div class="double-bounce1"></div>
-            <div class="double-bounce2"></div>
+        <div>
+          <div>
+            <span class="font-serif text-6xl">
+              {{ event.title }}
+            </span>
+            <span class="font-fancy text-gray-400 text-lg">
+              fancy a
+              <span class="tweet-link">
+                <a :href="tweetText" target="_new" class="text-blue-400"
+                  >tweet <font-awesome-icon :icon="['fab', 'twitter']"
+                /></a>
+                ?
+              </span>
+            </span>
           </div>
-        </div>
-        <div v-else-if="!updatingAttendees && !rsvp_done" class="mt-12">
-          <input
-            class="p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent shadow-lg"
-            placeholder="Your email"
-            v-model="rsvp_email"
-          />
-          <button
-            class="shadow-2xl border-transparent bg-purple-600 px-4 py-2 text-white rounded-lg m-3 hover:bg-purple-900"
-            v-on:click="rsvp"
+          <div
+            class="leading-none text-gray-600 tracking-tight font-extralight"
           >
-            RSVP
-          </button>
-        </div>
-        <div v-else-if="rsvp_done" class="mt-12">
-          <p>RSVP confirmed. You have been added to the calendar invite.</p>
+            {{ event.date_time_event }}
+          </div>
+          <div class="font-sans whitespace-pre-line mt-5">
+            {{ event.description }}
+          </div>
+          <div class="mt-12 font-bold">
+            Proposer:
+            <span class="font-normal">
+              {{ event.creator }}
+            </span>
+          </div>
+          <div class="font-bold">
+            Date & time:
+            <span class="font-normal">
+              {{ event.date_time_event }}
+            </span>
+          </div>
+          <!-- <form class="mt-12"> -->
+          <div v-if="udatingAttendees">
+            <div class="spinner rsvp">
+              <div class="double-bounce1"></div>
+              <div class="double-bounce2"></div>
+            </div>
+          </div>
+          <div v-else-if="!updatingAttendees && !rsvp_done" class="mt-12">
+            <input
+              class="p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent shadow-lg"
+              placeholder="Your email"
+              v-model="rsvp_email"
+            />
+            <button
+              class="shadow-2xl border-transparent bg-purple-600 px-4 py-2 text-white rounded-lg m-3 hover:bg-purple-900"
+              v-on:click="rsvp"
+            >
+              RSVP
+            </button>
+          </div>
+          <div v-else-if="rsvp_done" class="mt-12">
+            <p>RSVP confirmed. You have been added to the calendar invite.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -95,7 +110,8 @@ export default {
       },
       rsvp_email: "",
       udatingAttendees: false,
-      rsvp_done: false
+      rsvp_done: false,
+      tweetText: ""
     };
   },
   created: async function() {
@@ -126,6 +142,12 @@ export default {
 
       let date_time_event = date + " " + month + ", " + year + " " + time + " ";
       this.$data.event = { title, creator, date_time_event, description };
+
+      let tweet =
+        "RSVP'd for a junto at @kernel0x. Check it out here: https://juntos.kernel.community" +
+        this.$route.fullPath;
+      this.$data.tweetText =
+        "http://twitter.com/intent/tweet?text=" + encodeURIComponent(tweet);
     }
   },
   methods: {
