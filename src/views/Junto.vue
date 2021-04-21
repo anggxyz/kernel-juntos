@@ -112,13 +112,19 @@ export default {
       const date_time = r.fields["Start"];
       const description = r.fields["Description"];
       console.log(r.fields);
-      // date_time = new
+
       let d = new Date(date_time);
       let year = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
       let month = new Intl.DateTimeFormat("en", { month: "long" }).format(d);
       let date = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
+      let time = new Intl.DateTimeFormat("en", { timeStyle: "short" }).format(
+        d
+      );
+      // let timezone = " "
+      // let timezone = new Intl.DateTimeFormat("en", { timeZone: "long" });
+      console.log("datetime:", d);
 
-      let date_time_event = date + " " + month + ", " + year;
+      let date_time_event = date + " " + month + ", " + year + " " + time + " ";
       this.$data.event = { title, creator, date_time_event, description };
     }
   },
