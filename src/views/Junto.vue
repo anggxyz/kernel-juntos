@@ -58,28 +58,39 @@
               {{ event.date_time_event }}
             </span>
           </div>
+          <div class="font-bold" v-if="event.seats_available > 0">
+            Total Seats:
+            <span class="font-normal">
+              {{ event.seats_available }}
+            </span>
+          </div>
           <!-- <form class="mt-12"> -->
-          <div v-if="udatingAttendees">
-            <div class="spinner rsvp">
-              <div class="double-bounce1"></div>
-              <div class="double-bounce2"></div>
+          <div v-if="event.seats_available == 0" class="mt-12">
+            <p>No seats available for this Junto.</p>
+          </div>
+          <div v-else>
+            <div v-if="udatingAttendees">
+              <div class="spinner rsvp">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+              </div>
             </div>
-          </div>
-          <div v-else-if="!updatingAttendees && !rsvp_done" class="mt-12">
-            <input
-              class="p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent shadow-lg"
-              placeholder="Your email"
-              v-model="rsvp_email"
-            />
-            <button
-              class="shadow-2xl border-transparent bg-purple-600 px-4 py-2 text-white rounded-lg m-3 hover:bg-purple-900"
-              v-on:click="rsvp"
-            >
-              RSVP
-            </button>
-          </div>
-          <div v-else-if="rsvp_done" class="mt-12">
-            <p>RSVP confirmed. You have been added to the calendar invite.</p>
+            <div v-else-if="!updatingAttendees && !rsvp_done" class="mt-12">
+              <input
+                class="p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent shadow-lg"
+                placeholder="Your email"
+                v-model="rsvp_email"
+              />
+              <button
+                class="shadow-2xl border-transparent bg-purple-600 px-4 py-2 text-white rounded-lg m-3 hover:bg-purple-900"
+                v-on:click="rsvp"
+              >
+                RSVP
+              </button>
+            </div>
+            <div v-else-if="rsvp_done" class="mt-12">
+              <p>RSVP confirmed. You have been added to the calendar invite.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -106,7 +117,8 @@ export default {
         description: "",
         title: "",
         creator: "",
-        attendees: ""
+        attendees: "",
+        seats_available: 0
       },
       rsvp_email: "",
       udatingAttendees: false,
@@ -127,6 +139,13 @@ export default {
       const creator = r.fields["Creator's Name"];
       const date_time = r.fields["Start"];
       const description = r.fields["Description"];
+      const limit = r.fields["Limit"];
+      const attendees = r.fields["Attendees"];
+
+      let seats_available = limit - attendees.split(",").length;
+
+      if (seats_available < 0) seats_available = 0;
+
       console.log(r.fields);
 
       let d = new Date(date_time);
@@ -141,7 +160,13 @@ export default {
       console.log("datetime:", d);
 
       let date_time_event = date + " " + month + ", " + year + " " + time + " ";
-      this.$data.event = { title, creator, date_time_event, description };
+      this.$data.event = {
+        title,
+        creator,
+        date_time_event,
+        description,
+        seats_available
+      };
 
       let tweet =
         "RSVP'd for a junto at @kernel0x. Check it out here: https://juntos.kernel.community" +
