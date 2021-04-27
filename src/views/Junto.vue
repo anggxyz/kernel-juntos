@@ -59,7 +59,7 @@
             </span>
           </div>
           <div class="font-bold" v-if="event.seats_available > 0">
-            Total Seats:
+            Seats Available:
             <span class="font-normal">
               {{ event.seats_available }}
             </span>
@@ -143,8 +143,9 @@ export default {
       const attendees = r.fields["Attendees"];
 
       let seats_available = limit - attendees.split(",").length;
+      if (seats_available <= 0) seats_available = 0;
 
-      if (seats_available < 0) seats_available = 0;
+      if (limit == 0) seats_available = -1;
 
       console.log(r.fields);
 
