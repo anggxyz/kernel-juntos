@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 a {
-  border-bottom: 2px dashed #8C65F7;
+  color: #652efc;
+  border-bottom: 1px dashed #652efc;
 }
 .tweet-link a {
   border-bottom: none;

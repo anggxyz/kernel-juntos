@@ -28,7 +28,7 @@
             <span class="font-serif text-6xl">
               {{ event.title }}
             </span>
-            <span class="font-fancy text-gray-400 text-lg">
+            <!-- <span class="font-fancy text-gray-400 text-lg">
               fancy a
               <span class="tweet-link">
                 <a :href="tweetText" target="_new" class="text-blue-400"
@@ -36,15 +36,19 @@
                 /></a>
                 ?
               </span>
-            </span>
+            </span> -->
           </div>
           <div
             class="leading-none text-gray-600 tracking-tight font-extralight"
           >
             {{ event.date_time_event }}
           </div>
-          <div class="font-sans whitespace-pre-line mt-5">
-            {{ event.description }}
+          <div
+            class="font-sans whitespace-pre-line mt-5"
+            v-html="event.description"
+            v-linkified
+          >
+            <!-- {{ event.description }} -->
           </div>
           <div class="mt-12 font-bold">
             Proposer:

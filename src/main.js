@@ -7,10 +7,12 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import linkify from "vue-linkify";
 
 library.add(faCoffee, faTwitter);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
+Vue.directive("linkified", linkify);
 
 // "false" - to avoid Vue to output a “you’re in development mode” tip in the console.
 Vue.config.productionTip = true;
