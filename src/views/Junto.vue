@@ -5,8 +5,11 @@
         <div class="absolute inset-y-0 left-0 flex items-center">
           <div class="flex items-center justify-center flex-grow">
             <!-- <div class="px-3">KERNEL Juntos</div> -->
-            <img class="inline w-36 mr-12" src="../assets/logo.png" />
-            <div class="px-3 font-serif text-3xl italic">
+            <img
+              class="inline w-36 p-5 mr-2 sm:w-36 sm:mr-12"
+              src="../assets/logo.png"
+            />
+            <div class="text-base sm:px-3 font-serif sm:text-3xl italic">
               Spark a thought. Start a Junto.
             </div>
           </div>
@@ -21,11 +24,11 @@
     </div>
     <div v-else>
       <div
-        class="container max-w-3xl mx-auto mb-14 my-6 px-14 py-14 bg-gray-100 shadow-xl rounded-3xl"
+        class="container max-w-3xl mx-auto mb-14 my-6 px-14 py-14 sm:bg-gray-100 sm:shadow-xl sm:rounded-3xl"
       >
         <div>
           <div>
-            <span class="font-serif text-6xl">
+            <span class="font-serif sm:text-5xl text-4xl">
               {{ event.title }}
             </span>
             <!-- <span class="font-fancy text-gray-400 text-lg">
@@ -44,7 +47,7 @@
             {{ event.date_time_event }}
           </div>
           <div
-            class="font-sans whitespace-pre-line mt-5"
+            class="font-sans whitespace-pre-line mt-5 text-lg"
             v-html="event.description"
             v-linkified
           >
