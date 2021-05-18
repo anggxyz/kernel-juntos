@@ -96,7 +96,7 @@
               </button>
             </div>
             <div v-else-if="rsvp_done" class="mt-12">
-              <p>RSVP confirmed. You have been added to the calendar invite.</p>
+              <p>{{ msg }}</p>
             </div>
           </div>
         </div>
@@ -118,6 +118,7 @@ export default {
   },
   data: () => {
     return {
+      msg: "",
       loading: true,
       event: {
         date_time_event: "",
@@ -195,6 +196,18 @@ export default {
         this.$data.event.attendees = r.fields["Attendees"];
         this.$data.udatingAttendees = true;
         let _attendees;
+        // check if already rsvpd
+        if (this.$data.event.attendees.search(this.$data.rsvp_email) > 0) {
+          //already rsvpd
+          this.$data.rsvp_done = true;
+          this.$data.msg =
+            "You have already RSVP'd and have been added to the event.";
+          this.$data.udatingAttendees = false;
+          this.$data.rsvp_email = "";
+          return;
+        }
+
+        // add rsvp
         if (this.$data.event.attendees) {
           _attendees =
             this.$data.event.attendees + ", " + this.$data.rsvp_email;
@@ -210,6 +223,8 @@ export default {
               }
             }
           ]);
+          this.$data.msg =
+            "RSVP confirmed. You have been added to the calendar invite.";
           this.$data.rsvp_done = true;
         } catch (err) {
           console.log("error in updating", err);
