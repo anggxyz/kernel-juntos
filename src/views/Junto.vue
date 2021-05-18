@@ -149,7 +149,7 @@ export default {
       const limit = r.fields["Limit"];
       const attendees = r.fields["Attendees"];
 
-      let seats_available = limit - attendees.split(",").length;
+      let seats_available = limit - (attendees.split(",").length - 1);
       if (seats_available <= 0) seats_available = 0;
 
       if (limit == 0) seats_available = -1;
