@@ -26,14 +26,20 @@
       <div
         class="container max-w-3xl mx-auto mb-14 my-6 px-14 py-14 sm:bg-gray-100 sm:shadow-xl sm:rounded-3xl"
       >
+        <span class="font-serif sm:text-5xl text-4xl">
+          404.
+        </span>
         <div class="font-sans text-xl mt-5">
           To schedule a Junto, submit the form linked in the
           <a
             href="https://www.notion.so/gitcoin/Juntos-f92ef2c9576a48e2972bc411fb13187b"
+            target="_new"
             >KERNEL Block III</a
           >
           Explorer. All scheduled juntos are dropped in
-          <a href="https://app.slack.com/client/T016DS66R99/C016JL4385C"
+          <a
+            href="https://app.slack.com/client/T016DS66R99/C016JL4385C"
+            target="_new"
             >#kernel-juntos</a
           >
           channel on Slack.
