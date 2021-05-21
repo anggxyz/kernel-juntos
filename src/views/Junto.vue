@@ -47,7 +47,7 @@
             {{ event.date_time_event }}
           </div>
           <div
-            class="font-sans whitespace-pre-line mt-5 text-lg"
+            class="font-sans whitespace-pre-line mt-5 text-lg break-words"
             v-html="event.description"
             v-linkified
           >
@@ -84,7 +84,7 @@
             </div>
             <div v-else-if="!updatingAttendees && !rsvp_done" class="mt-12">
               <input
-                class="p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent shadow-lg"
+                class="p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 shadow-lg"
                 placeholder="Your email"
                 v-model="rsvp_email"
               />
