@@ -63,6 +63,9 @@
             Date & time:
             <span class="font-normal">
               {{ event.date_time_event }}
+              <span v-if="event.recurring == true"
+                >(This is a recurring event)</span
+              >
             </span>
           </div>
           <div class="font-bold" v-if="event.seats_available > 0">
@@ -72,9 +75,6 @@
             </span>
           </div>
           <!-- <form class="mt-12"> -->
-          <div v-if="event.recurring == true" class="mt-12">
-            <p>This is a recurring event.</p>
-          </div>
           <div
             v-if="event.passed == true && event.recurring == false"
             class="mt-12"
