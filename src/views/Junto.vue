@@ -72,7 +72,13 @@
             </span>
           </div>
           <!-- <form class="mt-12"> -->
-          <div v-if="event.passed == true" class="mt-12">
+          <div v-if="event.recurring == true" class="mt-12">
+            <p>This is a recurring event.</p>
+          </div>
+          <div
+            v-if="event.passed == true && event.recurring == false"
+            class="mt-12"
+          >
             <p>This event was in the past.</p>
           </div>
           <div v-else-if="event.cancelled == true" class="mt-12">
@@ -134,7 +140,8 @@ export default {
         attendees: "",
         seats_available: 0,
         cancelled: false,
-        passed: false
+        passed: false,
+        recurring: false
       },
       rsvp_email: "",
       udatingAttendees: false,
@@ -158,7 +165,7 @@ export default {
       const limit = r.fields["Limit"];
       const attendees = r.fields["Attendees"];
       const cancelled = r.fields["Cancelled"];
-
+      const recurring = r.fields["Recurring"];
       let seats_available = limit - (attendees.split(",").length - 1);
 
       if (seats_available <= 0) seats_available = 0;
@@ -184,7 +191,8 @@ export default {
         description,
         seats_available,
         cancelled,
-        passed
+        passed,
+        recurring
       };
 
       let tweet =
