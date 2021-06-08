@@ -72,7 +72,13 @@
             </span>
           </div>
           <!-- <form class="mt-12"> -->
-          <div v-if="event.seats_available == 0" class="mt-12">
+          <div v-if="event.passed == true" class="mt-12">
+            <p>This event was in the past.</p>
+          </div>
+          <div v-else-if="event.cancelled == true" class="mt-12">
+            <p>This event has been cancelled</p>
+          </div>
+          <div v-else-if="event.seats_available == 0" class="mt-12">
             <p>No seats available for this Junto.</p>
           </div>
           <div v-else>
@@ -126,7 +132,9 @@ export default {
         title: "",
         creator: "",
         attendees: "",
-        seats_available: 0
+        seats_available: 0,
+        cancelled: false,
+        passed: false
       },
       rsvp_email: "",
       udatingAttendees: false,
@@ -149,24 +157,24 @@ export default {
       const description = r.fields["Description"];
       const limit = r.fields["Limit"];
       const attendees = r.fields["Attendees"];
+      const cancelled = r.fields["Cancelled"];
 
       let seats_available = limit - (attendees.split(",").length - 1);
+
       if (seats_available <= 0) seats_available = 0;
 
       if (limit == 0) seats_available = -1;
 
-      console.log(r.fields);
-
       let d = new Date(date_time);
+      let now = new Date();
+      let passed;
+      if (d.getTime() < now.getTime()) passed = true;
       let year = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
       let month = new Intl.DateTimeFormat("en", { month: "long" }).format(d);
       let date = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
       let time = new Intl.DateTimeFormat("en", { timeStyle: "short" }).format(
         d
       );
-      // let timezone = " "
-      // let timezone = new Intl.DateTimeFormat("en", { timeZone: "long" });
-      console.log("datetime:", d);
 
       let date_time_event = date + " " + month + ", " + year + " " + time + " ";
       this.$data.event = {
@@ -174,7 +182,9 @@ export default {
         creator,
         date_time_event,
         description,
-        seats_available
+        seats_available,
+        cancelled,
+        passed
       };
 
       let tweet =
