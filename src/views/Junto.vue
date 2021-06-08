@@ -60,7 +60,10 @@
             </span>
           </div>
           <div class="font-bold">
-            Date & time:
+            Date & time
+            <span v-if="event.timezone" class="font-light"
+              >({{ event.timezone }})</span
+            >:
             <span class="font-normal">
               {{ event.date_time_event }}
               <span v-if="event.recurring == true"
@@ -141,7 +144,8 @@ export default {
         seats_available: 0,
         cancelled: false,
         passed: false,
-        recurring: false
+        recurring: false,
+        timezone: ""
       },
       rsvp_email: "",
       udatingAttendees: false,
@@ -182,7 +186,7 @@ export default {
       let time = new Intl.DateTimeFormat("en", { timeStyle: "short" }).format(
         d
       );
-
+      let timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
       let date_time_event = date + " " + month + ", " + year + " " + time + " ";
       this.$data.event = {
         title,
@@ -192,7 +196,8 @@ export default {
         seats_available,
         cancelled,
         passed,
-        recurring
+        recurring,
+        timezone
       };
 
       let tweet =
