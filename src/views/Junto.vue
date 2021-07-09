@@ -77,9 +77,11 @@
               {{ event.seats_available }}
             </span>
           </div>
-          <!-- <form class="mt-12"> -->
+          <div v-if="event.interview" class="mt-12">
+            <p>This is an interview Junto.</p>
+          </div>
           <div
-            v-if="event.passed == true && event.recurring == false"
+            v-else-if="event.passed == true && event.recurring == false"
             class="mt-12"
           >
             <p>This event was in the past.</p>
@@ -145,7 +147,8 @@ export default {
         cancelled: false,
         passed: false,
         recurring: false,
-        timezone: ""
+        timezone: "",
+        interview: false
       },
       rsvp_email: "",
       udatingAttendees: false,
@@ -170,6 +173,7 @@ export default {
       const attendees = r.fields["Attendees"];
       const cancelled = r.fields["Cancelled"];
       const recurring = r.fields["Recurring"];
+      const interview = r.fields["Interview"];
       let seats_available = limit - (attendees.split(",").length - 1);
 
       if (seats_available <= 0) seats_available = 0;
@@ -197,7 +201,8 @@ export default {
         cancelled,
         passed,
         recurring,
-        timezone
+        timezone,
+        interview
       };
 
       let tweet =
